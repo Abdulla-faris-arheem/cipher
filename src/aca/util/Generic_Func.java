@@ -12,6 +12,8 @@ public class Generic_Func {
 	static String[] num_str={"zero","one","two","three","four","five","six","seven","eight","nine"};
     static String[] num_str2={"twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"};
     static String[] num_str3={"ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"};
+   
+   
     
 	public static ArrayList<Integer> split_number(int number)
 	{
@@ -130,5 +132,135 @@ public class Generic_Func {
 		
 		
 	}
+	
+	/*
+	 * Generate a random permutation of [start,end)
+	 */
+	public static int[] generate_random_perm(int start,int end)
+	{
+		ArrayList<Integer> num_set=new ArrayList<Integer>();
+		for(int i=start;i<end;i++)
+		{
+			num_set.add(i);
+		}
+		int[] result=new int[end-start];
+		Random random_gen=new Random();
+		int result_index=0;
+		while(num_set.size()!=1)
+		{
+			int cur_index=random_gen.nextInt(num_set.size());
+			result[result_index]=num_set.get(cur_index);
+			result_index++;
+			num_set.remove(cur_index);
+		}
+		result[result_index]=num_set.get(0);
+		return result;
+	}
+	
+	/*
+	 * Predicting the next position of spiral matrix
+	 */
+	
+	public static Pair<Integer> traverse_spiral(int cur_row,int cur_col,int square_len)
+	{
+		//int col_bound=square_len-1-cur_row;
+		//int row_bound=square_len-1-cur_col;
+		int midpoint=(square_len-1)/2;
+		int next_col=cur_col;
+		int next_row=cur_row;
+		if(cur_row==square_len/2 && cur_col==midpoint)
+		{
+			next_col=-1;
+			next_row=-1;
+		}
+		else if (cur_row<=midpoint)
+		{
+			//left boundary
+			if(cur_col<cur_row-1)
+			{
+				//move upwards
+				next_row--;
+			}
+			else if(cur_col<square_len-1-cur_row)
+			{
+				//going in the right horizontal direction
+				next_col++;
+			}
+			else if(next_col!=midpoint)//if(cur_col!=square_len-1-cur_row)
+			{
+				
+				//going downside
+				next_row++;
+			}
+			/*else
+			{
+				next_col=-1;
+				next_row=-1;
+			}*/
+		}
+		else
+		{
+			if(cur_col>cur_row)
+			{
+				//going downside
+				next_row++;
+			}
+			else if(cur_col>square_len-1-cur_row)
+			{
+				//going left
+				next_col--;
+			}
+			else
+			{
+				//going up
+				next_row--;
+			}
+		}
+	/*	else if(cur_col==square_len-1-cur_row)
+		{
+			next_col=-1;
+			next_row=-1;
+		}
+		else if(cur_col<)
+		{
+			next_row--;
+		}
+		else
+		{
+			next_row++;
+		}*/
+		Pair<Integer> p=new Pair<Integer>(next_row,next_col);
+		return p;
+	}
+	
+	public static int search_str(String[] s, String key)
+	{
+		for(int i=0;i<s.length;i++)
+		{
+			if(s[i].equals(key))
+				return i;
+		}
+		return -1;
+	}
+	
+	/*public static int binary_search_str(String[] s, String key)
+	{
+		return binary_search_str(s,key,0,s.length-1);
+	}
+	
+	public static int binary_search_str(String[] s, String key, int start,int end)
+	{
+		if(start>end)
+			return -1;
+		int cur=(start+end)/2;
+		if(s[cur]==key)
+		{
+			return cur;
+		}
+		else
+		{
+			
+		}
+	}*/
 
 }

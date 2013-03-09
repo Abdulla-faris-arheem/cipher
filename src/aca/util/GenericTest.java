@@ -11,10 +11,23 @@ public class GenericTest {
 	@Test
 	public void test() {
 		//fail("Not yet implemented");
-		ArrayList<String> spell_num=Generic_Func.spell_number(108);
-		for (int i=0;i<spell_num.size();i++)
+		//int[] result=Generic_Func.generate_random_perm(1,6);
+		//ArrayList<String> spell_num=Generic_Func.spell_number(108);
+		//for (int i=0;i<result.length;i++)
+		//{
+	//		System.out.println(result[i]);
+	//	}
+		for(int i=0;i<2;i++)
 		{
-			System.out.println(spell_num.get(i));
+			for(int j=0;j<2;j++)
+			{
+				System.out.println(i);
+				System.out.println(j);
+				System.out.println("Next");
+				Pair<Integer> next=Generic_Func.traverse_spiral(i, j, 2);
+				System.out.println(next.get_first());
+				System.out.println(next.get_second());
+			}
 		}
 		/*ArrayList<Integer> split_list=Generic_Func.split_number(3752);
 		ArrayList<Integer> desired=new ArrayList<Integer>();

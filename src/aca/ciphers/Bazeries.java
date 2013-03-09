@@ -1,6 +1,7 @@
 package aca.ciphers;
 
 import java.util.*;
+
 import aca.util.*;
 
 public class Bazeries implements Cipher {
@@ -13,6 +14,24 @@ public class Bazeries implements Cipher {
 		Random random_gen=new Random();
 		this.key=random_gen.nextInt(1000000);
 	}
+//	public static boolean need_key=false;
+	
+	 public boolean key_need()
+	 {
+	    return need_key;
+	 }
+	    
+	 public int get_key_num()
+	 {
+	    return 1;
+	 }
+	    
+	 public ArrayList<Integer> get_key_len()
+	 {
+	    return null;
+	 }
+	 
+	 private boolean need_key=false;
 	
 	public Bazeries(int k)
 	{
