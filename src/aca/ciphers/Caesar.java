@@ -12,7 +12,7 @@ public class Caesar implements Cipher {
 	public Caesar()
 	{
 		Random random_gen=new Random();
-		shift=random_gen.nextInt(26);
+		shift=1+random_gen.nextInt(25);
 	}
 	
 	public Caesar(int s)

@@ -13,6 +13,16 @@ public class Vigenere implements Cipher {
 		this.key=k;
 	}
 	
+	public static char get_vigenere_char(char k_char,char p_char)
+	{
+		char k_u=Character.toUpperCase(k_char);
+		char p_u=Character.toUpperCase(p_char);
+		int k_pos=k_u-'A';
+		int p_pos=p_u-'A';
+		int result=(k_pos+p_pos>=26)?k_pos+p_pos-26:k_pos+p_pos;
+		return (char)('A'+result);
+	}
+	
 	public boolean key_need()
 	  {
 		    return need_key;

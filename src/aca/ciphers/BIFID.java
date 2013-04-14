@@ -97,6 +97,13 @@ public class BIFID implements Cipher {
 		
 	}
 	
+	/**
+	 * Build a hashmap for each character in the square. 
+	 * 
+	 * @param square a square 
+	 * @return a hashmap (key: character in the square, value: a pair of integers (row, column) of the character in the square. The row and column starts from 0. 
+	 * 
+	 */
 	public static HashMap<Character,Pair<Integer>> build_map(char[][] square)
 	{
 	    int row=square.length;

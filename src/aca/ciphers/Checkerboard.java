@@ -88,7 +88,7 @@ public class Checkerboard implements Cipher {
 		  return sb.toString();
 	  }
 	  
-	  private String get_cipher_text(HashMap<Character,Pair<Integer>> r_c,char a)
+	  public String get_cipher_text(HashMap<Character,Pair<Integer>> r_c,char a)
 	  {
 		  char cur_char=(char)(a-'a'+'A');
 		  if(cur_char=='J')
@@ -129,7 +129,7 @@ public class Checkerboard implements Cipher {
 		  }
 	  }
 	  
-	  private HashMap<Character,Pair<Integer>> build_index_hash(char[][] square)
+	  public HashMap<Character,Pair<Integer>> build_index_hash(char[][] square)
 	  {
 		  HashMap<Character,Pair<Integer>> result=new HashMap<Character,Pair<Integer>>();
 		  int row=square.length;

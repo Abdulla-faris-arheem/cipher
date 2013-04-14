@@ -36,8 +36,14 @@ public class Two_square implements Cipher {
 			 return null;
 		 }
 	
-	
-	static void build_square(char[][] square, String key)
+	/**
+	 * Build a 5*5 Polybius square using a keyword. The letters are written in horizontal order.
+	 * I/J is combined.
+	 * 
+	 * @param square the polybius square which will be filled
+	 * @param key the keyword
+	 */
+	public static void build_square(char[][] square, String key)
 	{
 		boolean[] filled=new boolean[26];
 		String key_u=key.toUpperCase();

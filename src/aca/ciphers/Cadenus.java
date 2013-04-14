@@ -193,7 +193,7 @@ public class Cadenus implements Cipher {
 		  return result;
 	  }
 	  
-	  int[] generate_order(String key)
+	  public static int[] generate_order(String key)
 	  {
 		  String low_key=key.toLowerCase();
 		  int[] num=new int[key.length()];
