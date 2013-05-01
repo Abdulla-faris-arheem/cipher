@@ -21,9 +21,10 @@ public class Tri_square implements Cipher {
 		square3=BIFID.generate_bifid_square(key3);
 	}
 	
+	
 	public boolean key_need()
 	  {
-		    return need_key;
+		    return true;
 	 }
 		    
 		 public int get_key_num()
@@ -47,7 +48,7 @@ public class Tri_square implements Cipher {
 	
 	public Tri_square(ArrayList<String> keys)
 	{
-		if(keys.size()<2)
+		if(keys.size()<3)
 		{
 			System.err.println("Not enough keys");
 			return;
@@ -56,6 +57,9 @@ public class Tri_square implements Cipher {
 		{
 			this.keys.add(keys.get(i));
 		}
+		Foursquare.build_key_square(square1,this.keys.get(0));
+		Two_square.build_square(square2,this.keys.get(1));
+		square3=BIFID.generate_bifid_square(this.keys.get(2));
 	}
 	
 	 public String encode(String plain)
@@ -83,6 +87,14 @@ public class Tri_square implements Cipher {
 		 StringBuilder sb=new StringBuilder();
 		 char c1=pl.charAt(0);
 		 char c2=pl.charAt(1);
+		 if(c1=='J')
+		 {
+			 c1='I';
+		 }
+		 if(c2=='J')
+		 {
+			 c2='I';
+		 }
 		 Pair<Integer> p1=h1.get(Character.valueOf(c1));
 		 Pair<Integer> p2=h2.get(Character.valueOf(c2));
 		 Random r=new Random();
@@ -93,7 +105,7 @@ public class Tri_square implements Cipher {
 		 int rand=r.nextInt(4)+1;
 		 int rand2=r.nextInt(4)+1;
 		 int ct1_row=(c1_row+rand>4)?c1_row+rand-4:c1_row+rand;
-		 int ct2_col=(c2_col+rand2>4)?c2_col+rand-4:c2_col+rand;
+		 int ct2_col=(c2_col+rand2>4)?c2_col+rand2-4:c2_col+rand2;
 		 sb.append(square1[ct1_row][c1_col]);
 		 sb.append(square3[c1_row][c2_col]);
 		 sb.append(square2[c2_row][ct2_col]);
@@ -122,6 +134,11 @@ public class Tri_square implements Cipher {
     
     public static boolean need_key=true; //need to generate a string key
     
-    public static int key_num=3;   
+    public static int key_num=3; 
+    
+    public int process_id()
+	{
+		return 2;
+	}
 
 }

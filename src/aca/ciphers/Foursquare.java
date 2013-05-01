@@ -192,5 +192,10 @@ public class Foursquare implements Cipher{
     
     public boolean need_key=true; //need to generate a string key
     
-    public static int key_num=2;   
+    public static int key_num=2; 
+    
+    public int process_id()
+	{
+		return 2;
+	}
 }

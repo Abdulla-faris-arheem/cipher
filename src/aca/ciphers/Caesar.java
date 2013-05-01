@@ -67,6 +67,11 @@ public class Caesar implements Cipher {
 		return null;
 	}
 	
+	public int process_id()
+	{
+		return 2;
+	}
+	
 	private boolean need_key=false;
 
 }

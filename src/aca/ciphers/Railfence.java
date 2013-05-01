@@ -65,4 +65,9 @@ public class Railfence implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 0;
+		}
 }

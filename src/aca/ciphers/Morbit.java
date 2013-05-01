@@ -107,4 +107,9 @@ public class Morbit implements Cipher {
 	    	result.add(9);
 	    	return result;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

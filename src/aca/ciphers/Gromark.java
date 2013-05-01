@@ -30,14 +30,29 @@ public class Gromark implements Cipher {
 		}
 		char[][] result=new char[row][col];
 		boolean[] filled=new boolean[26];
-		for(int i=0;i<key_num.length;i++)
+        int cur_row=0;
+        int cur_col=0;
+		for(int i=0;i<key.length();i++)
 		{
-			result[0][i]=key.toUpperCase().charAt(i);
-			int pos=result[0][i]-'A';
+			char cur_c=key.toUpperCase().charAt(i);
+			int pos=cur_c-'A';
+			if(filled[pos])
+				continue;
+			result[cur_row][cur_col]=cur_c;
 			filled[pos]=true;
+			if(cur_col==col-1)
+			{
+				cur_row++;
+				cur_col=0;
+			}
+			else
+			{
+			  cur_col++;
+			}
 		}
-		int cur_row=1;
-		int cur_col=0;
+		
+	//	int cur_row;
+	//	int cur_col=0;
 		for(int i=0;i<26;i++)
 		{
 			if(!filled[i])
@@ -119,7 +134,8 @@ public class Gromark implements Cipher {
 	{
 		String plain_l=plain.toLowerCase();
 		StringBuilder sb=new StringBuilder();
-		for(int i=0;i<5;i++)
+		int init_num=num_k.length<5?num_k.length:5;
+		for(int i=0;i<init_num;i++)
 		{
 			sb.append(num_k[i]);
 		}
@@ -137,12 +153,14 @@ public class Gromark implements Cipher {
 	
 	protected int[] generate_num_k(String plain,int primer)
 	{
+		//special case: plain.length<primer.length
 		int[] result=new int[plain.length()];
 		String p_s=Integer.toString(primer);
 		char[] p_array=p_s.toCharArray();
 		int array_len=p_array.length;
 	//	assert(p_array.length==5);
-		for(int i=0;i<array_len;i++)
+		int init=plain.length()<5?plain.length():5;
+		for(int i=0;i<init;i++)
 		{
 			result[i]=p_array[i]-'0';
 		}
@@ -167,16 +185,21 @@ public class Gromark implements Cipher {
 	    
 	    public boolean key_need()
 	    {
-	    	return false;
+	    	return true;
 	    }
 	    
 	    public int get_key_num()
 	    {
-	    	return 0;
+	    	return 1;
 	    }
 	    
 	    public ArrayList<Integer> get_key_len()
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

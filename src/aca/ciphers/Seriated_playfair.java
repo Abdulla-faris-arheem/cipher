@@ -11,14 +11,14 @@ public class Seriated_playfair extends Playfair {
 	{
 		key="LOGARITHM";
 		Random r=new Random();
-		period=r.nextInt(15);
+		period=2+r.nextInt(13);
 	}
 	
 	public Seriated_playfair(String k)
 	{
 		key=k;
 		Random r=new Random();
-		period=r.nextInt(15);
+		period=2+r.nextInt(13);
 	}
 	
 	public Seriated_playfair(String k,int p)
@@ -56,16 +56,17 @@ public class Seriated_playfair extends Playfair {
 	{
 		//int block_period=(end-start)/2;
 		int block_id=start/(ct.length*period);
-		for(int i=start;i<end;i++)
+		int p_len=(end-start)/2<period?(end-start)/2:period;
+		for(int i=start;i<start+p_len;i++)
 		{
-			int block_pos=i%period;
-			if(i+period>=end)
-				break;
+			int block_pos=(i-start)%p_len;
+		//	if(i+period>=end)
+		//		break;
 			StringBuilder sb=new StringBuilder();
-			if(plain.charAt(i)==plain.charAt(i+period))
+			if(plain.charAt(i)==plain.charAt(i+p_len))
 				continue;
 			sb.append(plain.charAt(i));
-			sb.append(plain.charAt(i+period));
+			sb.append(plain.charAt(i+p_len));
 			String result=get_sub_ct(sb.toString(),h_map,square);
 			ct[0][period*block_id+block_pos]=result.charAt(0);
 			ct[1][period*block_id+block_pos]=result.charAt(1);
@@ -103,16 +104,21 @@ public class Seriated_playfair extends Playfair {
 	    
 	    public boolean key_need()
 	    {
-	    	return false;
+	    	return true;
 	    }
 	    
 	    public int get_key_num()
 	    {
-	    	return 0;
+	    	return 1;
 	    }
 	    
 	    public ArrayList<Integer> get_key_len()
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

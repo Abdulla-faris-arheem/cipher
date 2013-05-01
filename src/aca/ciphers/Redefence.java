@@ -128,4 +128,9 @@ public class Redefence implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 0;
+		}
 }

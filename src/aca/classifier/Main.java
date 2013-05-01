@@ -24,7 +24,7 @@ public class Main {
         	 BufferedReader bf=new BufferedReader(new FileReader(args[0]));
              String line;
         	BufferedWriter bw=new BufferedWriter(new FileWriter(args[1]));
-        	//int count=0;
+        	int count=0;
            while((line=bf.readLine())!=null)
            {
         	 //  System.out.println(count);
@@ -39,7 +39,8 @@ public class Main {
         	   SVMFeature f=c.extract_feature(parts[1]);
         	   ArrayList<Double> feat_vec=c.build_feature_vec(f);
         	   c.print_training(tag, feat_vec, bw);
-        	//   count++;
+        	   count++;
+        	   System.err.println(count);
            }
            bw.close();
            bf.close();

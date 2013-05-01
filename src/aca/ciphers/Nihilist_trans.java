@@ -46,7 +46,17 @@ public class Nihilist_trans implements Cipher {
 		fill_square(square,plain,start,end);
 		char[][] square2=transpose_square(key,square,false);
 		char[][] square3=transpose_square(key,square2,true);
-		String sub_cipher=read_square(square3,true);
+		Random r=new Random();
+		int num=r.nextInt(2);
+		String sub_cipher;
+		if(num==1)
+		{
+		   sub_cipher=read_square(square3,true);
+		}
+		else
+		{
+			sub_cipher=read_square(square3,false);
+		}
 		return sub_cipher;
 	}
 	
@@ -162,4 +172,9 @@ public class Nihilist_trans implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 0;
+		}
 }

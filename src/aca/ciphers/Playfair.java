@@ -124,4 +124,9 @@ public class Playfair implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

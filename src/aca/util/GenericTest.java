@@ -17,7 +17,12 @@ public class GenericTest {
 		//{
 	//		System.out.println(result[i]);
 	//	}
-		for(int i=0;i<2;i++)
+		int[] result=Generic_Func.get_num_sample(4, 16);
+		for(int i=0;i<result.length;i++)
+		{
+			System.out.println(result[i]);
+		}
+	/*	for(int i=0;i<2;i++)
 		{
 			for(int j=0;j<2;j++)
 			{
@@ -28,7 +33,7 @@ public class GenericTest {
 				System.out.println(next.get_first());
 				System.out.println(next.get_second());
 			}
-		}
+		}*/
 		/*ArrayList<Integer> split_list=Generic_Func.split_number(3752);
 		ArrayList<Integer> desired=new ArrayList<Integer>();
 	    desired.add(3);

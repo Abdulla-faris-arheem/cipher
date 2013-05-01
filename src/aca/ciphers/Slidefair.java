@@ -24,7 +24,7 @@ public class Slidefair implements Cipher {
 		{
 			plain_u+="X";
 		}
-		char[][] block=Incomp_column.build_block(plain_u, period*2, 0);
+		char[][] block=Incomp_column.build_block(plain_u, -1,period*2, 0);
 		StringBuilder sb=new StringBuilder();
 		for(int i=0;i<block.length;i++)
 		{
@@ -97,4 +97,9 @@ public class Slidefair implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

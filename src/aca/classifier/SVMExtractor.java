@@ -1,13 +1,32 @@
 package aca.classifier;
 
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Map.Entry;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import aca.main.encoder;
 
-public class SVMClassifier implements Classifier {
+public class SVMExtractor {
+	
+	public SVMExtractor()
+	{
+		
+	}
+	
+	public SVMExtractor(String unigram_f,String bi_trigram_f)
+	{
+		try
+		{
+			read_uni_prob(unigram_f);
+			read_gram_file(bi_trigram_f);
+		}
+		catch(Exception e)
+		{
+			System.err.println("Error in reading probability files");
+			return;
+		}
+	}
 	
 	public double compute_ic(String text)
 	{
@@ -15,6 +34,8 @@ public class SVMClassifier implements Classifier {
 		String text_l=text.toLowerCase();
 		for(char c: text_l.toCharArray())
 		{
+			if(c==' ')
+				continue;//omit blank
 			Character cur_c=Character.valueOf(c);
 			if(h_map.containsKey(cur_c))
 			{
@@ -30,6 +51,7 @@ public class SVMClassifier implements Classifier {
 		{
 			//denominator=0
 			System.err.println("The total length is less than 2. Unable to compute ic");
+			return 0.0;
 		}
 		int numerator=0;
 		for(Entry<Character, Integer> entry: h_map.entrySet())
@@ -91,6 +113,9 @@ public class SVMClassifier implements Classifier {
 		}
 		return max_ic;
 	}
+	
+	
+	
 	
 	public double compute_kappa(String text,String comp_text)
 	{
@@ -262,34 +287,6 @@ public class SVMClassifier implements Classifier {
 		return map;
 	}
 	
-	public void read_uni_prob(String prob_file)
-	{
-		try
-		{
-			BufferedReader br=new BufferedReader(new FileReader(prob_file));
-			String line;
-			while((line=br.readLine())!=null)
-			{
-				if(line.startsWith("#"))
-					continue;
-				else
-				{
-					String[] parts=line.trim().split("\t");
-					assert(parts.length==2);
-					Character cur=Character.valueOf(parts[0].charAt(0));
-					Double value=Double.parseDouble(parts[1]);
-					uni_probs.put(cur, value);
-				}
-			}
-		}
-		catch(Exception e)
-		{
-			System.err.println(e.getMessage());
-		}
-	}
-	
-	private HashMap<Character,Double> uni_probs=new HashMap<Character,Double>();
-	
 	private boolean all_number(String text)
 	{
 		for(char c:text.toCharArray())
@@ -298,6 +295,16 @@ public class SVMClassifier implements Classifier {
 				return false;
 		}
 		return true;
+	}
+	
+	private boolean contain_num(String text)
+	{
+		for(char c:text.toCharArray())
+		{
+			if(c<'0' || c>'9')
+				return true;
+		}
+		return false;
 	}
 	
 	private int get_start_num(String text)
@@ -326,20 +333,6 @@ public class SVMClassifier implements Classifier {
 		}
 		return num;
 	}
-	
-	public boolean even_len(String text)
-	{
-		String[] parts=text.split(" ");
-		int sum=0;
-		for (int i=0;i<parts.length;i++)
-		{
-			sum+=parts[i].length();
-		}
-		if(sum%2==0)
-			return true;
-		else
-		    return false;
-	}
     
 	public SVMFeature extract_feature(String text)
 	{
@@ -355,10 +348,23 @@ public class SVMClassifier implements Classifier {
 		if(all_number(text))
 		{
 			f.all_num=true;
-		}
+		}	
 		else
 		{
 			f.all_num=false;
+			if(contain_num(text))
+			{
+				f.part_num=true;
+				f.start_digit_num=get_start_num(text);
+				f.end_digit_num=get_end_num(text);
+			}
+			else
+			{
+				f.part_num=false;
+				f.start_digit_num=0;
+				f.end_digit_num=0;
+			}
+			
 		}
 		if(text.contains("#"))
 		{
@@ -370,6 +376,8 @@ public class SVMClassifier implements Classifier {
 		}
 		double ic=compute_ic(text);
 		f.ic=ic;
+		double dic=compute_dic(text);
+		f.dic=dic;
 		// HashMap<Character,Integer> frequencies=
 		f.frequencies=get_freq(text);
 		f.length=text.length();
@@ -384,8 +392,8 @@ public class SVMClassifier implements Classifier {
 		}
 		f.uni_prob=compute_uni_prob(text);
 		//only if f.part_num is true
-		f.start_digit_num=get_start_num(text);
-		f.end_digit_num=get_end_num(text);
+		//f.start_digit_num=get_start_num(text);
+		//f.end_digit_num=get_end_num(text);
 		double kappa=get_max_kappa(text);
 		f.max_kappa=kappa;
 		double lr=compute_lr(text);
@@ -393,8 +401,36 @@ public class SVMClassifier implements Classifier {
 		f.max_ic=compute_max_ic(text);
 		f.max_ic2=get_max_ic_shift(text);
 		f.half_percentage=compute_half_percent(text);
-	//	f.bigram_derivation=compute_bigram_dv(text,)
+		f.length_25=len_25(text);
 		return f;
+	}
+	
+	public boolean even_len(String text)
+	{
+		String[] parts=text.split(" ");
+		int sum=0;
+		for (int i=0;i<parts.length;i++)
+		{
+			sum+=parts[i].length();
+		}
+		if(sum%2==0)
+			return true;
+		else
+		    return false;
+	}
+	
+	public boolean len_25(String text)
+	{
+		String[] parts=text.split(" ");
+		int sum=0;
+		for (int i=0;i<parts.length;i++)
+		{
+			sum+=parts[i].length();
+		}
+		if(sum%25==0)
+			return true;
+		else
+		    return false;
 	}
 	
 	public double compute_half_percent(String text)
@@ -411,20 +447,6 @@ public class SVMClassifier implements Classifier {
 				nz_cnt++;
 		}
 		return (double)am_cnt/(double)nz_cnt;
-	}
-	
-	public boolean len_25(String text)
-	{
-		String[] parts=text.split(" ");
-		int sum=0;
-		for (int i=0;i<parts.length;i++)
-		{
-			sum+=parts[i].length();
-		}
-		if(sum%25==0)
-			return true;
-		else
-		    return false;
 	}
 	
 	public double compute_uni_prob(String text)
@@ -536,7 +558,7 @@ public class SVMClassifier implements Classifier {
 	
 	
 	
-	public void print_training(String tag,ArrayList<Double> features, BufferedWriter bw)
+	public void print_feature(String tag,ArrayList<Double> features, BufferedWriter bw)
 	{
 		//for(int i=0;i<features.size();i++)
 		//{
@@ -575,49 +597,60 @@ public class SVMClassifier implements Classifier {
 		
 	}
 	
-	/*public void print_test(String tag,String encipher_text)
+	public void read_uni_prob(String prob_file)
 	{
-		
-	}*/
+		try
+		{
+			br=new BufferedReader(new FileReader(prob_file));
+			String line;
+			while((line=br.readLine())!=null)
+			{
+				if(line.startsWith("#"))
+					continue;
+				else
+				{
+					String[] parts=line.trim().split("\t");
+					assert(parts.length==2);
+					Character cur=Character.valueOf(parts[0].charAt(0));
+					Double value=Double.parseDouble(parts[1]);
+					uni_probs.put(cur, value);
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			System.err.println(e.getMessage());
+		}
+	}
 	
-	//digraph incidence of coincidence
-/*	public double get_dic(String text)
+	public void read_gram_file(String bi_f)
 	{
-		int text_len=text.length();
-		if(text_len%2!=0)
+		try
 		{
-			return 0.0;
-		}
-		HashMap<String,Integer> di_count=new HashMap<String,Integer>();
-		for(int i=0;i<text_len;i+=2)
-		{
-			String digraph=text.substring(i,i+2);
-			if(di_count.containsKey(digraph))
+			br = new BufferedReader(new FileReader(bi_f));
+			String line;
+			while((line=br.readLine())!=null)
 			{
-				int cur_cnt=di_count.get(digraph);
-			    di_count.put(digraph, cur_cnt+1);
-			}
-			else
-			{
-				di_count.put(digraph,1);
-			}
-		}
-		int numerator=0;
-		for(String k:di_count.keySet())
-		{
-			int cnt=di_count.get(k);
-			if(cnt>1)
-			{
-				numerator+=cnt*(cnt-1);
+				if(line.startsWith("#"))
+					continue;
+				else
+				{
+					String[] parts=line.trim().split("\t");
+					assert(parts.length==2);
+					String cur=parts[0];
+					//Character cur=Character.valueOf(parts[0].charAt(0));
+					Double value=Double.parseDouble(parts[1]);
+					gram_probs.put(cur, value);
+				}
 			}
 		}
-		if(numerator==0)
-			return 0.0;
-		double denominator=(double)(text_len)*(double)(text_len-1)/(double)(text_len/2);
-		return (double)numerator/denominator;
-		
-	}*/
+		catch(Exception e)
+		{
+			System.err.println(e.getMessage());
+		}
+	}
 	
-	
-	
+	private HashMap<Character,Double> uni_probs=new HashMap<Character,Double>();
+    private HashMap<String,Double> gram_probs=new HashMap<String,Double>();
+	private BufferedReader br;
 }

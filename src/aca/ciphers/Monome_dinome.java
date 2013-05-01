@@ -102,7 +102,7 @@ public class Monome_dinome implements Cipher {
 	    }
 	    for(int i=0;i<26;i++)
 	    {
-	    	if(i==25 || i==10)
+	    	if(i==25 || i==9)
 	    		continue;
 	    	if(!filled[i])
 	    	{
@@ -155,4 +155,9 @@ public class Monome_dinome implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

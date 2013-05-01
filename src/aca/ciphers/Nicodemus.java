@@ -23,7 +23,7 @@ public class Nicodemus implements Cipher {
 	public String encode(String plain)
 	 {
 		int[] key_order=Cadenus.generate_order(key);
-		char[][] block=Incomp_column.build_block(plain, key.length(), 0);
+		char[][] block=Incomp_column.build_block(plain, -1,key.length(), 0);
 		char[][] r_block=reorder_block(block,key_order);
 		vige_cipher(r_block,key_order);
 		String cipher_text=read_block(r_block);
@@ -64,7 +64,10 @@ public class Nicodemus implements Cipher {
 			{
 			  for(int j=start_row;j<end_row;j++)
 			  {
-				sb.append(block[j][i]);
+				  if(block[j][i]!='\0')
+				  {
+				    sb.append(block[j][i]);
+				  }
 			  }
 			}
 			start_row=end_row;
@@ -114,4 +117,9 @@ public class Nicodemus implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

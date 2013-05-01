@@ -221,6 +221,11 @@ public class Cadenus implements Cipher {
 		  return result;
 		  
 	  }
+	  
+	  public int process_id()
+		{
+			return 2;
+		}
 	    
 	    /*
 	     * Decode the cipher text.

@@ -38,6 +38,7 @@ public class Progressive_key implements Cipher {
 			int end=i+period>plain_u.length()?plain_u.length():i+period;
 			char kp_c=(char)(kp+'A');
 			kp+=progression_index;
+			kp=kp%26;
 			for(int j=i;j<end;j++)
 			{
 				char k1=key_u.charAt(j-i);
@@ -73,4 +74,9 @@ public class Progressive_key implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

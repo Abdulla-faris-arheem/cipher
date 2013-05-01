@@ -93,9 +93,9 @@ public class Rag_baby implements Cipher {
 			{
 				cur_c='I';
 			}
-			if(cur_c=='W')
+			if(cur_c=='X')
 			{
-				cur_c='X';
+				cur_c='W';
 			}
 			int pos=cur_c-'A';
 			if(filled[pos])
@@ -146,4 +146,9 @@ public class Rag_baby implements Cipher {
 	    {
 	    	return true;
 	    }
+	    
+	    public int process_id()
+		{
+			return 3;
+		}
 }

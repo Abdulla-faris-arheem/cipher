@@ -13,6 +13,13 @@ public class Frac_morse implements Cipher {
 		create_hash(key,h_map);
 	}
 	
+	public Frac_morse(String k)
+	{
+		key=k;
+		create_hash(key,h_map);
+	}
+	
+	
 	private void create_hash(String k,HashMap<String,Character> map)
 	{
 		String k_u=k.toUpperCase();
@@ -155,4 +162,9 @@ public class Frac_morse implements Cipher {
 	    
 	    private String key="ROUNDTABLE";
 	    private HashMap<String,Character> h_map=new HashMap<String,Character>();
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

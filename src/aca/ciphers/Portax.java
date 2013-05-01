@@ -30,7 +30,7 @@ public class Portax implements Cipher {
         {
         	plain_u+='X';
         }
-		char[][] block=Incomp_column.build_block(plain_u, key.length(), 0);
+		char[][] block=Incomp_column.build_block(plain_u, -1,key.length(), 0);
 		char[][] result_block=new char[block.length][block[0].length];
 		for(int i=0;i<block[0].length;i++)
 		{
@@ -204,4 +204,9 @@ public class Portax implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

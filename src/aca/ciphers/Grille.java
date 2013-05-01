@@ -51,13 +51,15 @@ public class Grille implements Cipher {
 	public char[][] fill_grille(int[] position,String plain)
 	{
 		assert(position.length==4);
-		assert(plain.length()<16);
+		assert(plain.length()<=16);
 		int total_len=plain.length();
 		char[][] result=new char[4][4];
 		int[] cur_holes=new int[4];
 		for (int i=0;i<4;i++)
 		{
+			
 			cur_holes[i]=position[i];
+			//System.err.println(cur_holes[i]);
 		}
 		int str_pos=0;//string position
 		for(int i=0;i<4;i++)
@@ -66,8 +68,8 @@ public class Grille implements Cipher {
 			//fill the hole
 			for(int j=0;j<4;j++)
 			{
-			  int cur_row=(cur_holes[j]-1)/4;
-			  int cur_col=(cur_holes[j]-1)%4;
+			  int cur_row=(cur_holes[j])/4;
+			  int cur_col=(cur_holes[j])%4;
 			  if(str_pos<total_len)
 			  {
 				  result[cur_row][cur_col]=plain.charAt(str_pos);
@@ -81,7 +83,7 @@ public class Grille implements Cipher {
 			  //turn 90 degrees clockwise
 			  cur_row=cur_col;
 			  cur_col=4-1-temp;
-			  int pos=cur_row*4+cur_col+1;
+			  int pos=cur_row*4+cur_col;
 			  cur_holes[j]=pos;
 			}
 			if(str_pos>=total_len)
@@ -148,5 +150,10 @@ public class Grille implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 	    
 }

@@ -43,7 +43,7 @@ public class Quagmire_IV extends Quagmire_III {
 				  ct_table[i][j]=new_ct[j];
 			  }
 		}
-		char[][] pt_block=Incomp_column.build_block(plain, v_key.length(), 0);
+		char[][] pt_block=Incomp_column.build_block(plain, -1,v_key.length(), 0);
 		StringBuilder sb=new StringBuilder();
 		
 		for(int i=0;i<pt_block.length;i++)
@@ -74,7 +74,7 @@ public class Quagmire_IV extends Quagmire_III {
 	    
 	    public int get_key_num()
 	    {
-	    	return 2;
+	    	return 3;
 	    }
 	    
 	    public ArrayList<Integer> get_key_len()

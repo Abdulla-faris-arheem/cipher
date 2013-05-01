@@ -191,4 +191,9 @@ public class Tridigital implements Cipher {
     public static boolean allow_empty=true;
     
     public static boolean allow_num=false;
+    
+    public int process_id()
+	{
+		return 2;
+	}
 }

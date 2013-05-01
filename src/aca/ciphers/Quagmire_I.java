@@ -29,7 +29,7 @@ public class Quagmire_I implements Cipher {
 		char[] pt=build_keyed_alphabet(h_key,26,0);
 		int a_pos=Generic_Func.find_char(pt, 'A');
 		char[][] ct_table=build_ct(v_key,a_pos);
-		char[][] pt_block=Incomp_column.build_block(plain, period, 0);
+		char[][] pt_block=Incomp_column.build_block(plain, -1,period, 0);
 		StringBuilder sb=new StringBuilder();
 		
 		for(int i=0;i<pt_block.length;i++)
@@ -141,4 +141,9 @@ public class Quagmire_I implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

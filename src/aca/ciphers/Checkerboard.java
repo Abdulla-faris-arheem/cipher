@@ -160,5 +160,10 @@ public class Checkerboard implements Cipher {
 	//    boolean complex=false;
 	    
 	    public static int key_num=3; 
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 
 }

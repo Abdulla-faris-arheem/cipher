@@ -47,7 +47,7 @@ public class Gronsfeld implements Cipher {
 	public String cipher_sub(int[] key,String subt)
 	{
 		StringBuilder sb=new StringBuilder();
-		assert(subt.length()<key.length);
+		assert(subt.length()<=key.length);
 		for(int i=0;i<subt.length();i++)
 		{
 			sb.append(get_cipher_char(key[i],subt.toUpperCase().charAt(i)));
@@ -98,4 +98,9 @@ public class Gronsfeld implements Cipher {
 	    }
 	    private int period;
 	    private int[] key;
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

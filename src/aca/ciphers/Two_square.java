@@ -190,5 +190,10 @@ public class Two_square implements Cipher {
     public boolean need_key=true; //need to generate a string key
     
     public static int key_num=2;   
+    
+    public int process_id()
+	{
+		return 2;
+	}
 
 }

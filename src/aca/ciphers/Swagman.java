@@ -35,7 +35,7 @@ public class Swagman implements Cipher {
 			col++;
 		}
 		String plain_u=plain.toUpperCase();
-	    char[][] pt=Incomp_column.build_block(plain_u, col, 0);
+	    char[][] pt=Incomp_column.build_block(plain_u, period,col, 0);
 	    int[][] key_square=make_key_square(num_key);
 	  //  int[][] key_square={{3,2,1,4,5},{1,5,3,2,4},{2,4,5,3,1},{5,3,4,1,2},{4,1,2,5,3}};
 	    StringBuilder sb=new StringBuilder();
@@ -48,6 +48,14 @@ public class Swagman implements Cipher {
 		return sb.toString();
 	 }
 	
+	/**
+	 * Get the cipher text of substring of a square (or part of the square)
+	 * @param pt plain text square (can have null values)
+	 * @param start_col start column
+	 * @param end_col end column 
+	 * @param key_square square containing numbers to do the transposition
+	 * @return cipher text
+	 */
 	private String get_sub_ct(char[][] pt, int start_col,int end_col,int[][] key_square)
 	{
 		
@@ -56,8 +64,11 @@ public class Swagman implements Cipher {
 		StringBuilder sb=new StringBuilder();
 		for(int i=start_col;i<end_col;i++)
 		{
+			//find the correct position for each column
 			for(int j=0;j<row;j++)
 			{
+				if(pt[j][i]=='\0')
+					continue;
 				result_ct[key_square[j][i-start_col]-1][i-start_col]=pt[j][i];
 				/*if(pt[j][i]!='\0')
 				{
@@ -241,4 +252,9 @@ public class Swagman implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

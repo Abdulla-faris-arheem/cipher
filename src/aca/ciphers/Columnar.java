@@ -137,4 +137,9 @@ public class Columnar implements Cipher {
 	    }
 	    
 	    public boolean need_key=false; //need to generate a string key
+	    
+	    public int process_id()
+		{
+			return 0;
+		}
 }

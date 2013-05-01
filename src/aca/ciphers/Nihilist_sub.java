@@ -27,7 +27,7 @@ public class Nihilist_sub implements Cipher {
 		int period=key.length();
 		int[] key_num=new int[period];
 		generate_row_col(key_num,h_map,key);
-		int[] p_num=new int[4];
+		int[] p_num=new int[period];
 		StringBuilder sb=new StringBuilder();
 		for(int i=0;i<plain.length();i+=period)
 		{
@@ -86,4 +86,9 @@ public class Nihilist_sub implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

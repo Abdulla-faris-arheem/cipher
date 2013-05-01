@@ -39,7 +39,7 @@ public class Digrafid implements Cipher {
 		build_rec(rec1,h1,keys.get(0),true);
 		build_rec(rec2,h2,keys.get(1),false);
 		Random r=new Random();
-		period=r.nextInt(15);
+		period=1+r.nextInt(14);
 	}
 	
 	public void build_rec(char[][] rec, HashMap<Character,Pair<Integer>> map, String key,boolean up)
@@ -137,13 +137,15 @@ public class Digrafid implements Cipher {
 				}
 			}
 		}
+		map.put('#', new Pair<Integer>(row,col));
+		rec[row][col]='#';
 		
 	}
 	 
      public String encode(String plain)
      {
     	String p=plain.toLowerCase();
-    	if(plain.length()/2==1)
+    	if(plain.length()%2==1)
     	{
     		p+="x";
     	}
@@ -156,7 +158,7 @@ public class Digrafid implements Cipher {
     		sb.append(cipher_sub(p.substring(pos,end_pos)));
     		pos=end_pos;
     	}
-    	return sb.toString(); 
+    	return sb.toString().toUpperCase(); 
      }
      
      public String cipher_sub(String sub)
@@ -250,11 +252,16 @@ public class Digrafid implements Cipher {
 		    
 		 public int get_key_num()
 		 {
-		    return 1;
+		    return 2;
 		 }
 		    
 		 public ArrayList<Integer> get_key_len()
 		 {
 			 return null;
 		 }
+		 
+		 public int process_id()
+			{
+				return 2;
+			}
 }

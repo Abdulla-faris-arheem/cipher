@@ -1,18 +1,20 @@
 package aca.ciphers;
 
 import java.util.ArrayList;
-//import java.util.Random;
+import java.util.Random;
 
-import aca.util.Generic_Func;
+//import aca.util.Generic_Func;
 
 public class Key_phrase implements Cipher {
 	
 	public Key_phrase()
 	{
-		int[] array=Generic_Func.generate_random_perm(1, 27);
-		for(int i=0;i<array.length;i++)
+		//int[] array=Generic_Func.generate_random_perm(1, 27);
+		Random r=new Random();
+		for(int i=0;i<26;i++)
 		{
-			cipher_alphabet[i]=(char)('A'+i-1);
+			int letter_pos=r.nextInt(26);
+			cipher_alphabet[i]=(char)('A'+letter_pos);
 		}
 	}
 	
@@ -72,4 +74,9 @@ public class Key_phrase implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

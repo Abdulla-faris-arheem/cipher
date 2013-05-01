@@ -29,15 +29,18 @@ public class Incomp_column implements Cipher {
 	
 	public String encode(String plain)
 	 {
-		char[][] block=build_block(plain,period,0);
+		char[][] block=build_block(plain,-1,period,0);
 		String cipher_text=read_block(block,key);		
 		return cipher_text;
 	 }
 	
-	public static char[][] build_block(String plain, int period, int direction)
+	public static char[][] build_block(String plain, int row,int period, int direction)
 	{
 		String plain_u=plain.toUpperCase();
-		int row=plain_u.length()/period;
+		if(row==-1)
+		{
+		   row=plain_u.length()/period;
+		}
 		if(plain_u.length()%period!=0)
 		{
 			row++;
@@ -124,4 +127,9 @@ public class Incomp_column implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 0;
+		}
 }

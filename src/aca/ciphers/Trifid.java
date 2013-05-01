@@ -209,4 +209,9 @@ public class Trifid implements Cipher {
     public boolean need_key=true; //need to generate a string key
     
     public int key_num=1;
+    
+    public int process_id()
+	{
+		return 2;
+	}
 }

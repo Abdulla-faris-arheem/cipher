@@ -104,4 +104,9 @@ public class Homophonic implements Cipher {
 	    	result.add(4);
 	    	return result;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

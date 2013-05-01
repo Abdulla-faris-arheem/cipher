@@ -182,6 +182,9 @@ the squares to match. The ciphertext is then written in 5-letter groups.
     char[][] p_square=new char[][]{{'a','f','l','q','v'},{'b','g','m','r','w'},
     		{'c','h','n','s','x'},{'d','i','o','t','y'},{'e','k','p','u','z'}};
     
-
+    public int process_id()
+	{
+		return 2;
+	}
 
 }

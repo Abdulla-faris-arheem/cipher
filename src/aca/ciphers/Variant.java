@@ -80,5 +80,10 @@ public class Variant implements Cipher {
     
     public static boolean need_key=true; //need to generate a string key
     
-    public static int key_num=1;   
+    public static int key_num=1;  
+    
+    public int process_id()
+	{
+		return 2;
+	}
 }

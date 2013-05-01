@@ -243,6 +243,59 @@ public class Generic_Func {
 		return -1;
 	}
 	
+	public static int find_char(char[] array, char c)
+	{
+		for(int i=0;i<array.length;i++)
+		{
+			if(array[i]==c)
+			{
+				return i;
+			}
+			
+		}
+		return -1;
+	}
+	
+	public static int search_index(int[] array,int num,int start_index)
+	{
+		for(int i=start_index;i<array.length;i++)
+		{
+			if(array[i]==num)
+				return i;
+		}
+		return -1;
+	}
+	
+	/*
+	 * Get a subset of m samples from n numbers (0-n-1,inclusive)
+	 */
+	public static int[] get_num_sample(int m,int n)
+	{
+		int[] total_array=new int[n];
+		for(int i=0;i<n;i++)
+		{
+			total_array[i]=i;
+		}
+	    int[] result=new int[m];
+	  //  int cur_m=m;
+	    Random r=new Random();
+	    for(int i=0;i<m;i++)
+	    {
+	    	int pos=i+r.nextInt(n-i); 
+	    	result[i]=total_array[pos];
+	    	swap_int(total_array,i,pos);
+	    }
+	    return result;
+	}
+	
+	public static void swap_int(int[] array, int index1,int index2)
+	{
+		int a=array[index1];
+		array[index1]=array[index2];
+		array[index2]=a;
+	}
+	
+	
 	/*public static int binary_search_str(String[] s, String key)
 	{
 		return binary_search_str(s,key,0,s.length-1);

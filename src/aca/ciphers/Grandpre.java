@@ -89,6 +89,11 @@ public class Grandpre implements Cipher {
 	    	return null;
 	    }
 	    
+	    public int process_id()
+		{
+			return 2;
+		}
+	    
 	    private char[][] key_square=new char[8][8];
 	    private HashMap<Character,ArrayList<Pair<Integer>> > h_map=new HashMap<Character,ArrayList<Pair<Integer>> >();
 }

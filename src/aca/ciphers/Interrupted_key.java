@@ -87,4 +87,9 @@ public class Interrupted_key implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

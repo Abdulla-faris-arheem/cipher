@@ -166,5 +166,10 @@ public class Amsco implements Cipher {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public int process_id()
+	{
+		return 0;
+	}
 
 }

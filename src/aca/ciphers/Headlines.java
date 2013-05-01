@@ -16,7 +16,7 @@ public class Headlines implements Cipher {
 	
 	public Headlines(ArrayList<String> keys)
 	{
-		assert(keys.size()>3);
+		assert(keys.size()>=3);
 		hat=keys.get(0);
 		key=keys.get(1);
 		setting=keys.get(2);
@@ -116,8 +116,14 @@ public class Headlines implements Cipher {
 		int pos=0;
 		for(int i=0;i<k_u.length();i++)
 		{
-			result[pos]=k_u.charAt(i);
-			filled[k_u.charAt(i)-'A']=true;
+			char cur_c=k_u.charAt(i);
+			int char_pos=cur_c-'A';
+			if(filled[char_pos])
+			{
+				continue;
+			}
+			result[pos]=cur_c;
+			filled[char_pos]=true;
 			pos++;
 		}
 		for(int i=0;i<26;i++)
@@ -157,4 +163,9 @@ public class Headlines implements Cipher {
 	    //	ArrayList<>
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 2;
+		}
 }

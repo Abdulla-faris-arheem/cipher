@@ -47,7 +47,7 @@ public class Quagmire_II extends Quagmire_I {
 		{
 			pt[i]=(char)('A'+i);
 		}
-		char[][] pt_block=Incomp_column.build_block(plain, v_key.length(), 0);
+		char[][] pt_block=Incomp_column.build_block(plain, -1, v_key.length(), 0);
 		StringBuilder sb=new StringBuilder();
 		
 		for(int i=0;i<pt_block.length;i++)

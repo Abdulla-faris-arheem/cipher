@@ -23,7 +23,7 @@ public class Myszkowski implements Cipher {
 	public String encode(String plain)
 	 {
 		int[] num_in=generate_order(key);
-		char[][] block=Incomp_column.build_block(plain, key.length(), 0);
+		char[][] block=Incomp_column.build_block(plain, -1,key.length(), 0);
 		char[][] trans_block=transp_block(block,num_in);
 		String cipher_text=read_block(trans_block);
 		
@@ -165,4 +165,9 @@ public class Myszkowski implements Cipher {
 	    {
 	    	return null;
 	    }
+	    
+	    public int process_id()
+		{
+			return 0;
+		}
 }

@@ -181,6 +181,11 @@ public class BIFID implements Cipher {
     	return "";
     }
     
+    public int process_id()
+	{
+		return 2;
+	}
+    
     private int period=8;
     private String keyword="EXTRAORDINARY";
 }
